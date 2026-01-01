@@ -17,7 +17,6 @@ export const initMongoDb = async () => {
 
     console.log('creating indexes...');
     const usersCollection = db.collection('users');
-    // Create a unique index on the 'name' field to prevent duplicate users names in the database
     await usersCollection.createIndex({ username: 1 }, { unique: true });
     console.log('MongoDB indexes ready.');
 

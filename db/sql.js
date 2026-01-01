@@ -18,7 +18,6 @@ export const initSqlDb = async () => {
     await connection.query(`CREATE DATABASE IF NOT EXISTS messages`);
     console.log('MySQL database checked/created.');
 
-    // Close the initial connection and reconnect with the 'messages' database selected
     await connection.end();
     connection = await mysql.createConnection({
       ...dbConfig,
@@ -26,7 +25,6 @@ export const initSqlDb = async () => {
     });
 
     console.log('Checking MySQL tables...');
-    // Create 'messages' table if it doesn't exist to ensure schema readiness
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS messages (
         id INT PRIMARY KEY AUTO_INCREMENT,
