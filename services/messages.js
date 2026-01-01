@@ -49,11 +49,15 @@ export const decryptMessage = async (mysqlConn, mongoDb, messageData) => {
   if (!user) {
     throw new Error("user not found");
   }
+  const message1 = await mysqlConn.execute(
+    "SELECT * FROM messages WHERE id = ?",
+    [messageId]
+  );
 
   if ((user.username === username, user.password === password)) {
     let message = "";
-    for (let i = user.encrypted_text.length - 1; i >= 0; i--) {
-      message += user.encrypted_text[i];
+    for (let i = message1[0][0].encrypted_text.length - 1; i >= 0; i--) {
+      message += message1[0][0].encrypted_text[i];
     }
 
     return {
