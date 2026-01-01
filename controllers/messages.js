@@ -26,3 +26,15 @@ export const decryptMessage=async(req,res)=>{
     res.status(500).json({ error: error.message });
   }
 }
+export const myProfile=async(req,res)=>{
+    try {
+    const { mysqlConn, mongoDbConn } = req;
+    const message = await messageService.myProfile(mysqlConn, mongoDbConn, req.body);
+    res.status(201).json(message);
+  } catch (error) {
+    if (error.message === 'Invalid product ID' || error.message === 'profil not found') {
+      return res.status(404).json({ error: error.message }); 
+    }
+    res.status(500).json({ error: error.message });
+  }
+}
