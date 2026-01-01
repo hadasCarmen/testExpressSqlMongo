@@ -13,6 +13,6 @@ router.route('/api/messages/encrypt')
 router.route('/api/messages/decrypt')
 .post(decryptMessage)
 
-// router.route('/api/users/me').post()
+
 export default router;
 
